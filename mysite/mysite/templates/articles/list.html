@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% block title %}Последние стати{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col s8">
+        {% if articles_list %}
+            <div class="row">
+                <div class="s12 m7">
+                <div class="card">
+                    <div class="card-image">
+                    <img style="width: 100%; height: auto;" src="/{{ actual_articl.articl_image }}" alt="img">
+                    </div>
+                    <div class="card-action">
+                        <a href="{% url 'articles:detail' actual_articl.id %}">{{actual_articl.articl_title}}</a>
+                    </div>
+                    <div class="card-content">
+                    <p>{{actual_articl.pub_date}}</p>
+                    </div>
+                </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <ul class="collection">
+                {% for a in articles_list %}
+                    {% if a.articl_crucial %}
+                        <li class="collection-item">
+                            {{a.pub_date|time:"H:i"}}
+                            <a style="font-weight: 900;"  href="{% url 'articles:detail' a.id %}">{{a.articl_title}}!</a>
+                            {% if a.was_changed_recently %}
+                                <span style="color: white;padding: 2px;border-radius: 10%;font-size: 10px;background-color: blue;">Обновлено</span>
+                            {% endif %}
+                            {% if a.articl_image %}
+                                <span>
+                                    <i style="position: absolute;" class="material-icons">camera_alt</i>
+                                </span>
+                            {% endif %}
+                        </li>
+                    {% else %}
+                        <li class="collection-item">
+                        {{a.pub_date|time:"H:i"}}
+                        <a href="{% url 'articles:detail' a.id %}">{{a.articl_title}}</a>
+                        {% if a.was_changed_recently %}
+                            <span style="color: white;padding: 2px;border-radius: 10%;font-size: 10px;background-color: blue;">Обновлено</span>
+                        {% endif %}
+                        </li>
+                    {% endif %}
+                    
+                {% endfor %}
+                </ul>  
+            
+
+
+                <ul class="pagination">
+                    {% if articles_list.has_previous %}
+                    <li class="waves-effect"><a href="{{ articles_list.previous_page_number }}"><i class="material-icons">chevron_left</i></a></li>
+                    <li class="waves-effect"><a href="1">1</a></li>
+                    {% else %}
+                    <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+                    {% endif %}
+                    {% if articles_list.number >= 3 %}
+                        <li class="disabled"><a href="#!">...</a></li>
+                        <li class="waves-effect"><a href="{{ articles_list.previous_page_number }}">{{ articles_list.previous_page_number }}</a></li>
+                    {% endif %}
+                    <li class="active"><a href="#!">{{ articles_list.number }}</a></li>
+                    {% if articles_list.next_page_number < articles_list.paginator.num_pages %}
+                        <li class="waves-effect"><a href="{{ articles_list.next_page_number }}">{{ articles_list.next_page_number }}</a></li>
+                        <li class="disabled"><a href="#!">...</a></li>
+                    {% endif %}
+                    {% if articles_list.has_next %}
+                    <li class="waves-effect"><a href="{{ articles_list.paginator.num_pages }}">{{ articles_list.paginator.num_pages }}</a></li>
+                    <li class="waves-effect"><a href="{{ articles_list.next_page_number }}"><i class="material-icons">chevron_right</i></a></li>
+                    {% else %}
+                    <li class="disabled"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+                    {% endif %}
+                  </ul>
+                            
+            </div>  
+        {% else %}
+            Статьи не найдены!
+        {% endif %}
+    </div>
+    <div class="col s4">6-columns (one-half)</div>
+</div>
+{% endblock %}

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Новостной Сайт{% endblock%}</title>
+
+
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+</head>
+<body>
+    <!-- blue-grey lighten-1  -->
+    <header>
+        <nav class="transparent">
+            <div class="nav-wrapper container">
+                <a href="#!" class=" brand-logo center"><span class="blue-text">U</span><span class="yellow-text">k</span></a>
+                <ul class="left hide-on-med-and-down">
+                    <li>
+                        <div class="switch">
+                            <label>
+                            UA
+                            <input type="checkbox">
+                            <span class="lever"></span>
+                            EN
+                            </label>
+                    </div>
+                    </li>
+                </ul>
+                <ul class="right hide-on-med-and-down">
+                    <li><a href="sass.html"><i class="grey-text material-icons">search</i></a></li>
+                </ul>
+            </div>
+        </nav>
+        <nav class="blue darken-3">
+            <div class=" container">
+                <ul style="height: auto; display: flex; justify-content: center; width: 100%;">
+                    <li><a href="{% url 'articles:main' %}">NEWS</a></li>
+                    <li><a href="collapsible.html">DAILY</a></li>
+                    <li><a href="collapsible.html">STYLER</a></li>
+                    <li><a href="collapsible.html">TRAVEL</a></li>
+                </ul>
+            </div>
+        </nav>
+                
+    
+    </header>
+
+
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+
+     <!-- Compiled and minified JavaScript -->
+     <script src="     https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+</html>

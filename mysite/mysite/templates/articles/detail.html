@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}{{article.articl_title}}{% endblock %}
+
+{% block content %}
+    <h1>{{article.articl_title}}</h1>
+    
+    <img style="width: 512px;" src="/{{ article.articl_image }}" alt="img">
+    <p>{{article.articl_text}}</p>
+    <em>{{article.pub_date}}</em>
+    <hr>
+    
+{% endblock %}
